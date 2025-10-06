@@ -5,12 +5,15 @@ public class SlimeController : MonoBehaviour
 {
     [Header("Launch")]
     public float maxPullDistance = 3f;  // how far you can pull back
-    public float launchPower = 12f;     // velocity multiplier
+    public float launchPower = 8f;     // velocity multiplier
     public LineRenderer aimLine;        // show an aiming line
     public LayerMask groundMask;        // assign "Ground" layer in Inspector
 
     [Header("State (debug)")]
     public bool isStuck = true;
+
+    [Header("Physics")]
+    public float flightGravityScale = 2f;
 
     Rigidbody2D rb;
     Vector2 pullStart;
@@ -80,7 +83,7 @@ public class SlimeController : MonoBehaviour
     void Unstick()
     {
         isStuck = false;
-        rb.gravityScale = defaultGravity;
+        rb.gravityScale = flightGravityScale;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
