@@ -26,7 +26,6 @@ public class LevelCompleteUI : MonoBehaviour
 
     public void RestartLevel()
     {
-        Debug.Log("RestartLevel clicked");
         Time.timeScale = 1f;
         var scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.buildIndex);
