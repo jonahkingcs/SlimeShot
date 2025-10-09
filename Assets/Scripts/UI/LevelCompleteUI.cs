@@ -30,4 +30,16 @@ public class LevelCompleteUI : MonoBehaviour
         var scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.buildIndex);
     }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 1f; // unpause
+        int next = SceneManager.GetActiveScene().buildIndex + 1;
+
+        // Option A: wrap to the first level if we're at the end
+        if (next >= SceneManager.sceneCountInBuildSettings)
+            next = 0;
+
+        SceneManager.LoadScene(next);
+    }
 }
