@@ -17,14 +17,14 @@ public class GoalZone : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (triggered) return;
-
-        // Prefer a component check so you don't depend on tags
         var rb = other.attachedRigidbody;
-        if (rb && rb.GetComponent<SlimeController>())
-        {
-            triggered = true;
-            onGoalReached?.Invoke();
-        }
+        var slime = rb ? rb.GetComponent<SlimeController>() : null;
+        if (!slime) return;
+
+        // stop the HUD timer if present
+        var timer = FindObjectOfType<TimerUI>(true);
+        if (timer) timer.StopTimer();
+
+        onGoalReached?.Invoke(); // shows Level Complete UI
     }
 }
